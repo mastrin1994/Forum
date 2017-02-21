@@ -14,4 +14,5 @@ public interface UserRepository extends Repository<User, Integer>
 	public User findByIdIn(Integer id);
 	public List<User> findAll();
 	public User findTopByLoginInAndPasswordIn(String login, String password);
+	public User findTopByLoginIn(String login);
 }
