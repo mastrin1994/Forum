@@ -8,30 +8,14 @@
 	<h1>Forum</h1>
 	<table>
 		<tr>
-			<th>Temat</th>
-			<th>Data</th>
-			<th>Autor</th>
+			<th>Witaj na moim forum</th>
 		</tr>
-<!-- 		<c:forEach var="temat" items="${tematy}">
-			<tr>
-				<td>
-					<c:url var="url" scope="page" value="/temat">
-						<c:param name="id" value="${temat.id}" />
-					</c:url>
-					<a href="${url}">${temat.tytul}</a>
-				</td>
-				<td><fmt:formatDate value="${temat.data}" dateStyle="short" timeStyle="short" type="both"/>
-				<td>${temat.uzytkownik.login}</td>
-			</tr> 
-		</c:forEach>
-		 -->
+		<tr>
+			<th>Musisz się zalogować aby przeglądać tematy!</th>
+		</tr>
 	</table>
-	<!--  <c:url value="/nowyTemat" var="urlNowyTemat" scope="page" />
-	<form action="${urlNowyTemat}">
-		<input type="submit" value="Nowy temat" />
-	</form>-->
 	<br />
-	<a href="wyloguj">Wyloguj</a>
 	<a href="/login">Zaloguj</a>
+	<a href="/forum">Wejdź na forum</a>
 </body>
 </html>

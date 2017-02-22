@@ -26,19 +26,23 @@ public class ForumController
 	
     @GetMapping("/forum")
     public String getName(HttpServletRequest req, 
-        @CookieValue(value = "userId", defaultValue = "-1") String userId, Model model){
-    	if(userId.equals("-1")){
+        @CookieValue(value = "userId", defaultValue = "-1") String userId, Model model)
+    {
+    	if(userId.equals("-1"))
+    	{
             model.addAttribute("user", new User());
             return "login";           
-        } else {
+        } 
+    	else 
+    	{
         	List<Topic> topics = topicRepository.findAll();
         	List<UserRelatedTopic> userTopics = new ArrayList<UserRelatedTopic>();
         	
-        	for(Topic t : topics) {
+        	for(Topic t : topics) 
+        	{
         		User owner = userRepository.findByIdIn(t.getUserId());
         		userTopics.add(new UserRelatedTopic(t, owner));
         	}
-        	
         	model.addAttribute("list", userTopics);
             return "forum";
         }

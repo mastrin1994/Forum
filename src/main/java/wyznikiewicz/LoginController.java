@@ -13,36 +13,37 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class LoginController {
-
+public class LoginController
+{
 	@Autowired
 	private UserRepository userRepository;
 	
     @GetMapping("/login")
-    public String getLogin(HttpServletRequest req, 
-        @CookieValue(value = "userId", defaultValue = "-1") String userId, Model model){
-    	if(userId.equals("-1")){
+    public String getLogin(HttpServletRequest req, @CookieValue(value = "userId", defaultValue = "-1") String userId, Model model)
+    {
+    	if(userId.equals("-1"))
+    	{
             model.addAttribute("user", new User());
             return "login";           
-        } else {
-            return "forum";
+        } 
+    	else 
+        {
+    		return "redirect:/forum";
         }
     }
     
     @PostMapping("/login")
-    public String loginSubmit(HttpServletResponse response,
-    @ModelAttribute User user, Model model) {
-    	
+    public String loginSubmit(HttpServletResponse response, @ModelAttribute User user, Model model)
+    {
     	// Sprawdz w bazie danych, czy user z takim loginem i haslem istnieje
     	User userInDb = userRepository.findTopByLoginInAndPasswordIn(user.getLogin(),user.getPassword());
-    	if(userInDb != null){
+    	if(userInDb != null)
+    	{
             Cookie cookie = new Cookie("userId", Integer.toString(userInDb.getId()));
-            cookie.setMaxAge(1200);
-            		
+            cookie.setMaxAge(300);
             response.addCookie(cookie);
             return "redirect:/forum";
     	}
-    	
     	model.addAttribute("error", "Podano niepoprawne dane");
     	return "login";
     }

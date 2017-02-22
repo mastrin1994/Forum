@@ -15,21 +15,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class RegisterController {
-
+public class RegisterController
+{
 	@Autowired
 	private UserRepository userRepository;
 	
     @GetMapping("/register")
-    public String getLogin(HttpServletRequest req, 
-        @CookieValue(value = "userId", defaultValue = "-1") String userId, Model model){
-    	if(userId.equals("-1")){
+    public String getLogin(HttpServletRequest req, @CookieValue(value = "userId", defaultValue = "-1") String userId, Model model){
+    	if(userId.equals("-1"))
+    	{
             model.addAttribute("user", new User());
             return "register";           
-        } else {
-        	//User user = userRepository.findByIdIn(Integer.parseInt(userId));
-            //model.addAttribute("user", user);
-            return "forum";
+        }
+    	else 
+    	{
+        	return "redirect:/forum";
         }
     }
     
@@ -39,9 +39,9 @@ public class RegisterController {
     	
     	// Sprawdz w bazie danych, czy user z takim loginem i haslem istnieje
     	User userInDb = userRepository.findTopByLoginIn(user.getLogin());
-    	if(userInDb != null){
+    	if(userInDb != null)
+    	{
     		model.addAttribute("error", "Uzytkownik z podanum loginem juz istnieje");            		
-            
             return "register";
     	}
     	
