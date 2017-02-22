@@ -1,5 +1,8 @@
 package wyznikiewicz;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,37 +16,31 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class LoginController {
-
+public class ForumController
+{
+	@Autowired
+	private TopicRepository topicRepository;
+	
 	@Autowired
 	private UserRepository userRepository;
 	
-    @GetMapping("/login")
-    public String getLogin(HttpServletRequest req, 
+    @GetMapping("/forum")
+    public String getName(HttpServletRequest req, 
         @CookieValue(value = "userId", defaultValue = "-1") String userId, Model model){
     	if(userId.equals("-1")){
             model.addAttribute("user", new User());
             return "login";           
         } else {
+        	List<Topic> topics = topicRepository.findAll();
+        	List<UserRelatedTopic> userTopics = new ArrayList<UserRelatedTopic>();
+        	
+        	for(Topic t : topics) {
+        		User owner = userRepository.findByIdIn(t.getUserId());
+        		userTopics.add(new UserRelatedTopic(t, owner));
+        	}
+        	
+        	model.addAttribute("list", userTopics);
             return "forum";
         }
-    }
-    
-    @PostMapping("/login")
-    public String loginSubmit(HttpServletResponse response,
-    @ModelAttribute User user, Model model) {
-    	
-    	// Sprawdz w bazie danych, czy user z takim loginem i haslem istnieje
-    	User userInDb = userRepository.findTopByLoginInAndPasswordIn(user.getLogin(),user.getPassword());
-    	if(userInDb != null){
-            Cookie cookie = new Cookie("userId", Integer.toString(userInDb.getId()));
-            cookie.setMaxAge(1200);
-            		
-            response.addCookie(cookie);
-            return "redirect:/forum";
-    	}
-    	
-    	model.addAttribute("error", "Podano niepoprawne dane");
-    	return "login";
     }
 }

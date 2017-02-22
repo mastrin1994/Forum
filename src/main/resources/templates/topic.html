@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Forum - Temat</title>
+</head>
+<body>
+<p th:text="${topicName}" />
+<table class="table table-striped">
+  <tr th:each="message,iterStat : ${list}">
+    <td th:text="${message.author} + ' - ' + ${message.date}"></td>
+    <td th:text="${message.content}"></td>
+  </tr>
+</table>
+</body>
+</html>

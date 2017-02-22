@@ -5,8 +5,8 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 
 @Entity
-@Table(name="users")
-public class User  
+@Table(name="topic")
+public class Topic  
 {
 	@Id
 	@GeneratedValue
@@ -15,28 +15,22 @@ public class User
 	private int id;
 	
 	@NotNull
-	@Column(name="Login")
-	private String login;
+	@Column(name="Name")
+	private String name;
 	
 	@NotNull
-	@Column(name="Password")
-	private String password;
-	
-	@NotNull
-	@Column(name="RegisterDate")
+	@Column(name="CreationDate")
 	private Timestamp date;	
 	
-	public String getLogin() {
-		return login;
+	@NotNull
+	@Column(name="Author")
+	private int userId;
+	
+	public String getName() {
+		return name;
 	}
-	public void setLogin(String login) {
-		this.login = login;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public Timestamp getDate() {
 		return date;
@@ -49,5 +43,11 @@ public class User
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 }
