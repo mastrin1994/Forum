@@ -43,7 +43,13 @@ public class TopicController
     		{
     			Topic topic = topicRepository.findByIdIn(Integer.parseInt(topicId));
                 model.addAttribute("topicName", topic.getName());
-    			List<Message> messages = messageRepository.findAllByTopicIdIn(topic.getId());
+                model.addAttribute("topicDate", topic.getDate());
+                model.addAttribute("topicContent", topic.getContent());
+                
+                User Topicowner = userRepository.findByIdIn(Integer.parseInt(userId));
+                model.addAttribute("topicAuthor", Topicowner.getLogin());
+    			
+                List<Message> messages = messageRepository.findAllByTopicIdIn(topic.getId());
                 List<UserRelatedMessage> userMessages = new ArrayList<UserRelatedMessage>();
     			
     			

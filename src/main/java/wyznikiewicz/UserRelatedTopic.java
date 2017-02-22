@@ -11,7 +11,6 @@ public class UserRelatedTopic
 		author = owner.getLogin();
 	}
 	
-	
 	private int id;
 	private String name;
 	private Timestamp date;	

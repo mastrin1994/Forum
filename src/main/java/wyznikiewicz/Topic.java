@@ -26,6 +26,17 @@ public class Topic
 	@Column(name="Author")
 	private int userId;
 	
+	@NotNull
+	@Column(name="Content")
+	private String content;
+	
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
 	public String getName() {
 		return name;
 	}

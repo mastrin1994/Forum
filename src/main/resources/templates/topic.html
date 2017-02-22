@@ -11,11 +11,16 @@
 	<th><p th:text="${topicName}" /></th>
   </tr>
   <tr>
-	<th><p th:text="${topicAuthor}" /></th>
-	<th><p th:text="${topicDate}" /></th>
+	<td th:text="${topicAuthor}" ></td>
+	<td th:text="${topicDate}" ></td>
+	<table border="1">
+	<td th:text="${topicContent}"></td>
+	</table>
   </tr>
   <table>
-	  	<p><b>------------------------------------------------------------------- </b></p>
+	  	<br><b>------------------------------------------------------------------- </b></br>
+	  	<a href="/new_message">Dodaj nowy wątek</a>
+	  	<br> </br>
   </table>
 </table>
 <table class="table table-striped">
