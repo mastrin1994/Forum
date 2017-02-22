@@ -4,12 +4,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Forum - Temat</title>
 </head>
-<body>
-<p th:text="${topicName}" />
+<body background="http://2.bp.blogspot.com/-BsL9gRE80Ug/U0OgeWbbxtI/AAAAAAAAF-w/teXrzw-TBcU/s1600/nacre-background-tile.jpg">
+<table class="table table-striped">
+  <tr>
+   <th>Temat:</th>
+	<th><p th:text="${topicName}" /></th>
+  </tr>
+  <tr>
+	<th><p th:text="${topicAuthor}" /></th>
+	<th><p th:text="${topicDate}" /></th>
+  </tr>
+  <table>
+	  	<p><b>------------------------------------------------------------------- </b></p>
+  </table>
+</table>
 <table class="table table-striped">
   <tr th:each="message,iterStat : ${list}">
-    <td th:text="${message.author} + ' - ' + ${message.date}"></td>
-    <td th:text="${message.content}"></td>
+    <td th:text="${message.author}"></td>
+    <td th:text="${message.date}"></td>
+    <table border="1">
+    	<td th:text="${message.content}"></td>
+    </table>
+    <table>
+    	<p> - - - - - - - - </p>
+    </table>
   </tr>
 </table>
 </body>
