@@ -18,5 +18,25 @@
     <td th:text="${topic.author}"></td>
   </tr>
 </table>
+<br />
+
+<a href="javascript:clearAndRedirect('http://localhost:8080/')">Wyloguj</a>
+<script type="text/javascript">
+function deleteAllCookies()
+{
+    var cookies = document.cookie.split(";");
+        var cookie = cookies[0];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+}
+
+function clearAndRedirect(link) {
+    deleteAllCookies();
+    document.location = link;
+}
+
+</script>
 </body>
 </html>
+
