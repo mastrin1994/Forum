@@ -2,12 +2,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Forum - nowy wątek</title>
+<title>Forum - nowy temat</title>
 </head>
 <body background="http://2.bp.blogspot.com/-BsL9gRE80Ug/U0OgeWbbxtI/AAAAAAAAF-w/teXrzw-TBcU/s1600/nacre-background-tile.jpg">
-	<th>Nowy wątek</th>
+	<th>Nowy temat</th>
 	<p th:text="${error != null}?'Error: ' + ${error}" />
-	<form action="#" th:action="@{/new_message} + '/' + ${topic}" th:object="${message}" method="post">
+	<form action="#" th:action="@{/new_topic}" th:object="${topic}" method="post">
+  	<p>Tytuł: <input type="text" size="100" th:field="*{name}" required="required"/></p>
 		<p>Treść: <input type="text" size="100" th:field="*{content}" required="required"/></p>
 		<p><input type="submit" value="Zatwierdź" /> <input type="reset" value="Reset" /></p> 
 	</form>

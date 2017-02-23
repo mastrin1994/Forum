@@ -60,9 +60,10 @@ public class new_messageController
     public String MessageSubmit(@CookieValue(value = "userId", defaultValue = "-1") String userId,
     @ModelAttribute Message message,  Model model, @PathVariable String topic_id)
     {
-    	System.out.println(message.getContent());
-    	System.out.println(Integer.parseInt(userId));
-    	System.out.println(topic_id);
+    	System.out.println("tresc = " + message.getContent());
+    	System.out.println("userId = " + Integer.parseInt(userId));
+    	System.out.println("topicId = " + topic_id);
+    	System.out.println("messageId = " + message.getId());
     	
     	Timestamp t = new Timestamp(new Date().getTime());
     	message.setDate(t);
@@ -74,7 +75,6 @@ public class new_messageController
     
     	model.addAttribute("message", new Message());
     		
-    	return "topic";
+    	return "redirect:/topic?id=" + Integer.parseInt(topic_id);
     }
-
-    }
+}

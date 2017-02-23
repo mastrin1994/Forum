@@ -6,7 +6,14 @@
 </head>
 <body background="http://2.bp.blogspot.com/-BsL9gRE80Ug/U0OgeWbbxtI/AAAAAAAAF-w/teXrzw-TBcU/s1600/nacre-background-tile.jpg">
 	<h1>Forum</h1>
-	<table class="table table-striped">
+	<table>
+		<tr>
+   			<th><a th:href="@{/new_topic}">Dodaj nowy temat</a></th>
+			<th><a href="javascript:clearAndRedirect('http://localhost:8080/')">Wyloguj</a></th>
+ 	   </tr>
+  </table>
+  <b>------------------------------------------------------------------- </b>
+	<table class="table table-striped" border="1">
   <tr>
    <th>Temat</th>
 	<th>Data</th>
@@ -17,10 +24,14 @@
     <td th:text="${topic.date}"></td>
     <td th:text="${topic.author}"></td>
   </tr>
+  <table>
+	  	<b>------------------------------------------------------------------- </b>
+	  	<br><a th:href="@{/new_topic}">Dodaj nowy temat</a></br>
+	  	<a href="javascript:clearAndRedirect('http://localhost:8080/')">Wyloguj</a>	
+  </table>
 </table>
 <br />
 
-<a href="javascript:clearAndRedirect('http://localhost:8080/')">Wyloguj</a>
 <script type="text/javascript">
 function deleteAllCookies()
 {

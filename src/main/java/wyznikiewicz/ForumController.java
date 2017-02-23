@@ -52,11 +52,4 @@ public class ForumController
         }
     }
     
-    @PostMapping("http://localhost:8080/")
-    public String MessageSubmit(@CookieValue(value = "-1", defaultValue = "-1") String userId)
-    {
-     		
-    	return "/";
-    }
-    
 }
