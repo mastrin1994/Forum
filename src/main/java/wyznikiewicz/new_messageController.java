@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -31,7 +32,8 @@ public class new_messageController
 	private UserRepository userRepository;
 	
     @GetMapping("/new_message")
-    public String getName(HttpServletRequest req, @RequestParam("id") String topicId, @CookieValue(value = "userId", defaultValue = "-1") String userId, Model model)
+    public String getName(HttpServletRequest req, @RequestParam("id") String topicId,
+    		@CookieValue(value = "userId", defaultValue = "-1") String userId, Model model)
         {
         	if(userId.equals("-1"))
         	{
@@ -43,9 +45,10 @@ public class new_messageController
         		if(topicId != null)
         		{                 
         			Topic topic = topicRepository.findByIdIn(Integer.parseInt(topicId));
-                    model.addAttribute("topicName", topic.getName());
-                    model.addAttribute("topicDate", topic.getDate());
-                    model.addAttribute("topicId", topic.getId());
+                    Message m = new Message();
+                    m.setTopicId(topic.getId());
+                    model.addAttribute("message", m);
+                    model.addAttribute("topic", topic.getId());
                     return "new_message";
         		}
         		
@@ -53,16 +56,25 @@ public class new_messageController
             }
         }
     
-    @PostMapping("/new_message")
-    public String MessageSubmit(HttpServletResponse response, @CookieValue(value = "userId", defaultValue = "-1") String userId,
-    @ModelAttribute Message message, @RequestParam("id") String topicId,  Model model)
+    @PostMapping("/new_message/{topic_id}")
+    public String MessageSubmit(@CookieValue(value = "userId", defaultValue = "-1") String userId,
+    @ModelAttribute Message message,  Model model, @PathVariable String topic_id)
     {
+    	System.out.println(message.getContent());
+    	System.out.println(Integer.parseInt(userId));
+    	System.out.println(topic_id);
+    	
     	Timestamp t = new Timestamp(new Date().getTime());
     	message.setDate(t);
     	message.setUserId(Integer.parseInt(userId));
-    	message.setTopicId(Integer.parseInt(topicId));
-    	messageRepository.save(message);
+    	message.setTopicId(Integer.parseInt(topic_id));
+    	System.out.println(message.getContent());
     	
+    	messageRepository.save(message);
+    
+    	model.addAttribute("message", new Message());
+    		
     	return "topic";
     }
-}
+
+    }

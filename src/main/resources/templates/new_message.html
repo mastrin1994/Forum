@@ -7,9 +7,8 @@
 <body background="http://2.bp.blogspot.com/-BsL9gRE80Ug/U0OgeWbbxtI/AAAAAAAAF-w/teXrzw-TBcU/s1600/nacre-background-tile.jpg">
 	<th>Nowy wątek</th>
 	<p th:text="${error != null}?'Error: ' + ${error}" />
-	<form action="#" th:action="@{/new_message(id=${topicId})}" th:object="${message}" method="post">
-		<input  name="topicId" value="id" readonly="readonly"/>
-		<p>Treść: <input type="text" size="100" required="required"/><!-- th:field="*{content}"   />--></p>
+	<form action="#" th:action="@{/new_message} + '/' + ${topic}" th:object="${message}" method="post">
+		<p>Treść: <input type="text" size="100" th:field="*{content}" required="required"/></p>
 		<p><input type="submit" value="Zatwierdź" /> <input type="reset" value="Reset" /></p> 
 	</form>
 </body>

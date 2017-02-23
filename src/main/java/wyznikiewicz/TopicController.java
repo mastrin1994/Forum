@@ -46,7 +46,7 @@ public class TopicController
                 model.addAttribute("topicContent", topic.getContent());
                 model.addAttribute("topicId", topic.getId());
                 
-                User Topicowner = userRepository.findByIdIn(Integer.parseInt(userId));
+                User Topicowner = userRepository.findByIdIn(topic.getUserId());
                 model.addAttribute("topicAuthor", Topicowner.getLogin());
     			
                 List<Message> messages = messageRepository.findAllByTopicIdIn(topic.getId());
