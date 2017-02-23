@@ -1,4 +1,3 @@
-// 
 package wyznikiewicz;
 
 import java.util.List;
@@ -45,6 +44,7 @@ public class TopicController
                 model.addAttribute("topicName", topic.getName());
                 model.addAttribute("topicDate", topic.getDate());
                 model.addAttribute("topicContent", topic.getContent());
+                model.addAttribute("topicId", topic.getId());
                 
                 User Topicowner = userRepository.findByIdIn(Integer.parseInt(userId));
                 model.addAttribute("topicAuthor", Topicowner.getLogin());

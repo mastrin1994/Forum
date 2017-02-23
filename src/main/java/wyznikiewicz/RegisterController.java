@@ -21,7 +21,8 @@ public class RegisterController
 	private UserRepository userRepository;
 	
     @GetMapping("/register")
-    public String getLogin(HttpServletRequest req, @CookieValue(value = "userId", defaultValue = "-1") String userId, Model model){
+    public String getLogin(HttpServletRequest req, @CookieValue(value = "userId", defaultValue = "-1") String userId, Model model)
+    {
     	if(userId.equals("-1"))
     	{
             model.addAttribute("user", new User());
@@ -34,14 +35,13 @@ public class RegisterController
     }
     
     @PostMapping("/register")
-    public String loginSubmit(HttpServletResponse response,
-    @ModelAttribute User user, Model model) {
-    	
+    public String loginSubmit(HttpServletResponse response, @ModelAttribute User user, Model model)
+    {
     	// Sprawdz w bazie danych, czy user z takim loginem i haslem istnieje
     	User userInDb = userRepository.findTopByLoginIn(user.getLogin());
     	if(userInDb != null)
     	{
-    		model.addAttribute("error", "Uzytkownik z podanum loginem juz istnieje");            		
+    		model.addAttribute("error", "Uzytkownik z podanym loginem juz istnieje");            		
             return "register";
     	}
     	

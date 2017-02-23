@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Forum - nowy wątek</title>
+</head>
+<body background="http://2.bp.blogspot.com/-BsL9gRE80Ug/U0OgeWbbxtI/AAAAAAAAF-w/teXrzw-TBcU/s1600/nacre-background-tile.jpg">
+	<th>Nowy wątek</th>
+	<p th:text="${error != null}?'Error: ' + ${error}" />
+	<form action="#" th:action="@{/new_message(id=${topicId})}" th:object="${message}" method="post">
+		<input  name="topicId" value="id" readonly="readonly"/>
+		<p>Treść: <input type="text" size="100" required="required"/><!-- th:field="*{content}"   />--></p>
+		<p><input type="submit" value="Zatwierdź" /> <input type="reset" value="Reset" /></p> 
+	</form>
+</body>
+</html>
+<!--  type="hidden" -->
