@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,6 +67,28 @@ public class TopicController
     		return "forum";
         }
     }
+    
+    @GetMapping("/delete")
+    public String deleteTopic(@CookieValue(value = "userId", defaultValue = "-1") String userId, 
+    		@RequestParam("id") String topicId, Model model)
+    {
+        if(userId.equals("-1"))
+        {
+            model.addAttribute("user", new User());
+            return "login";           
+        }
+        else
+        {
+        	Topic topic = topicRepository.findByIdIn(Integer.parseInt(topicId));
+            if(topic.getUserId() == Integer.parseInt(userId)) 
+            {
+            	topicRepository.delete(topic);
+            }
+            return "redirect:/forum";
+        }
+        
+    }
+    
 }
 
 	

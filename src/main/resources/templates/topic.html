@@ -6,6 +6,7 @@
 </head>
 <body background="http://2.bp.blogspot.com/-BsL9gRE80Ug/U0OgeWbbxtI/AAAAAAAAF-w/teXrzw-TBcU/s1600/nacre-background-tile.jpg">
 <table class="table table-striped">
+<a href="http://localhost:8080/forum">Powrot</a>
   <tr>
    <th>Temat:</th>
 	<th><p th:text="${topicName}" /></th>
@@ -20,7 +21,9 @@
   <table>
 	  	<br><b>------------------------------------------------------------------- </b></br>
 	  	<a th:href="@{/new_message(id=${topicId})}">Dodaj nowy wątek</a>
-	  	<br> </br>	
+	  	<br><a th:href="@{/delete(id=${topicId})}">Usun ten temat</a>
+	  	 </br>	
+	  	<br><b>------------------------------------------------------------------- </b></br>
   </table>
 </table>
 <table class="table table-striped">
