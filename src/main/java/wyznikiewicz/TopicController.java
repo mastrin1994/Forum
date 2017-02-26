@@ -8,14 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class TopicController
@@ -68,6 +71,7 @@ public class TopicController
         }
     }
     
+    /** dzialajaca wersja delete ale w getMapping
     @GetMapping("/delete")
     public String deleteTopic(@CookieValue(value = "userId", defaultValue = "-1") String userId, 
     		@RequestParam("id") String topicId, Model model)
@@ -88,7 +92,51 @@ public class TopicController
         }
         
     }
+    */
+    /** Delete delete ale nie dzialajacy */
+    @RequestMapping(value = "/{delete}", method = RequestMethod.DELETE)
+    public @ResponseBody String deleteTopic(@CookieValue(value = "userId", defaultValue = "-1") String userId, 
+    		@RequestParam("id") String topicId, @ModelAttribute Topic topic, Model model)
+    {
+        if(userId.equals("-1"))
+        {
+            model.addAttribute("user", new User());
+            return "login";           
+        }
+        else
+        {
+        	Topic topicDB = topicRepository.findByIdIn(Integer.parseInt(topicId));
+            if(topicDB.getUserId() == Integer.parseInt(userId)) 
+            {
+            	topicRepository.delete(topicDB);
+            }
+            return "redirect:/forum";
+        }
+    }
     
+    // jakies smieci testowe
+    /**
+    @RequestMapping(value = "/{cartId}", method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable(value = "cartId") String cartId) {
+        cartService.delete(cartId);
+    }
+     */
+    /*
+    @RequestMapping(value = "/{authorizationUrll}", method = DELETE)
+    public @ResponseBody void deleteAuthorizationServer
+    (@RequestHeader(value="Authorization") String authorization, @PathVariable("authorizationUrl") String authorizationUrl)
+    {
+        System.out.printf("Testing: You tried to delete %s using %s\n", authorizationUrl, authorization);
+    }
+    */
+    /**
+     @RequestMapping(method = RequestMethod.DELETE)
+    public String deletePet(@PathVariable int ownerId, @PathVariable int petId) {
+        this.clinic.deletePet(petId);
+        return "redirect:/owners/" + ownerId;
+    }
+    */
 }
 
 	

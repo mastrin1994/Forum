@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Forum - Temat</title>
@@ -21,8 +21,11 @@
   <table>
 	  	<br><b>------------------------------------------------------------------- </b></br>
 	  	<a th:href="@{/new_message(id=${topicId})}">Dodaj nowy wątek</a>
-	  	<br><a th:href="@{/delete(id=${topicId})}">Usun ten temat</a>
-	  	 </br>	
+	  	<!--   <br><a th:href="@{/delete(id=${topicId})}">Usun ten temat</a></br>	-->
+	  	
+	  	<form action="#" th:action="@{/delete(id=${topicId})}" method="post">
+    		<br><a th:href="@{/delete(id=${topicId})}">Usun ten temat</a></br>
+		</form>
 	  	<br><b>------------------------------------------------------------------- </b></br>
   </table>
 </table>
